@@ -3,9 +3,9 @@ import numpy as np
 #np.random.seed(1000) Why this?
 
 # Define PCA class
-class PCA():
+class RPCA():
    
-    def __init__(self, n_components=None):
+    def __init__(self, n_components=None, solver='svd'):
         """Principal Component Analysis (PCA) implementation using NumPy from scratch.
         
         Transforms a dataset of possibly correlated values into n linearly
@@ -18,8 +18,11 @@ class PCA():
         -----------
         n_components : int or None, optional (default=None)
             Number of principal components to retain. If None, all components are retained.
+        solver : str, default 'svd'
+            {'svd', 'eigen'}
         """
         self.n_components = n_components
+        self.solver = solver
 
     # fit() method
     def fit(self, X):
@@ -28,13 +31,18 @@ class PCA():
 
         Parameters:
         -----------
-        X : matrix
-            Input data matrix, shape (n_samples, n_features).
+        X : matrix. Input data matrix, shape (n_samples, n_features).
 
         Returns:
         --------
         self : returns the instance itself.
         """
+        
+        # Mean centering
+        self.mean = np.mean(X, axis=0) # Calculate the mean of each feature
+        X = X.copy()
+        X -= self.mean
+
         # Calculate covariance matrix
         cov_matrix = np.cov(X.T)
 
