@@ -1,5 +1,5 @@
 # Title: Workshops Machine Learning 2
-### Especialización en Analítica y Ciencia de datos
+### Analytics & Data Science
 ### Universidad de Antioquia (2024-I)
 ### Author: Melissa Ortega Alzate
 
