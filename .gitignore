@@ -1,5 +1,4 @@
-.ipynb
-.DS_Store
-.jpg
-.docx
 __pycache__/
+.DS_Store
+*.jpg
+*.docx
