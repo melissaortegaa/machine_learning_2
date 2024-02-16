@@ -55,7 +55,7 @@ class PCA():
     def transform(self, X):
        
         X = X.copy()
-        return np.dot(X, self.components_.T)
+        return np.dot(X, self.components_)
 
         # fit_transform() method
 
