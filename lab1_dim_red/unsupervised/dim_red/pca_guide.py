@@ -4,7 +4,7 @@ import logging
 import numpy as np
 from scipy.linalg import svd
 
-# from mla.base import BaseEstimator
+from mla.base import BaseEstimator
 
 np.random.seed(1000)
 

@@ -1,6 +1,6 @@
 import numpy as np
-
-#np.random.seed(1000) Why this?
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler
 
 # Define PCA class
 class RPCA():
@@ -23,6 +23,7 @@ class RPCA():
         """
         self.n_components = n_components
         self.solver = solver
+        self.scaler = StandardScaler()  
 
     # fit() method
     def fit(self, X):
@@ -38,20 +39,23 @@ class RPCA():
         self : returns the instance itself.
         """
         
+        # Data preprocessing
+        X = self.scaler.fit_transform(X)
+
         # Mean centering
         self.mean = np.mean(X, axis=0) # Calculate the mean of each feature
         X = X.copy()
         X -= self.mean
 
-        # Calculate covariance matrix
-        cov_matrix = np.cov(X.T)
-
-        # Calculate eigenvalues and vectors of the covariance matrix
-        eigenvalues, eigenvectors = np.linalg.eig(cov_matrix)
-
-        # Order the eigenvectors by eigenvalues (descending)
-        idx = eigenvalues.argsort()[::-1]
-        self.components_ = eigenvectors[:, idx]
+        if self.solver == 'eig':
+            cov_matrix = np.cov(X.T)
+            eigenvalues, eigenvectors = np.linalg.eig(cov_matrix)
+            idx = eigenvalues.argsort()[::-1]   # Order the eigenvectors by eigenvalues (descending)
+            self.components_ = eigenvectors[:, idx]
+        
+        elif self.solver == 'svd':
+            U, S, Vt = np.linalg.svd(X)           # Calculate the SVD of the centered data matrix
+            self.components_ = Vt.T               # Extract principal components (eigenvectors) from Vt
 
         # Keep specified number of components
         if self.n_components is not None:
