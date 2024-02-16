@@ -1,12 +1,10 @@
 import numpy as np
-from scipy.linalg import svd
 
-# Define Singular values decomposition (SVD) class
 class SVD:
     """
     Singular Value Decomposition (SVD) implementation using NumPy from scratch.
     
-    SVD is a factorization of complex matrix that generalizes the eigendecomposition
+    SVD is a factorization of a complex matrix that generalizes the eigendecomposition
     of a square normal matrix to any matrix.
 
     Parameters:
@@ -15,10 +13,9 @@ class SVD:
         Number of components to keep. If None, all components are retained.
 
     """
-    def __init__(self, n_components = None):
+    def __init__(self, n_components=None):
         self.n_components = n_components
 
-    # fit() method
     def fit(self, X):
         """
         Fit the SVD model to the data.
@@ -34,19 +31,19 @@ class SVD:
         Vt : array, shape (n_components, n_features) or None    -> Right singular vectors
         """
 
-        # Calculate la descomposición de valores singulares of X matrix and save arrays U, S and Vt
-        self.U, self.S, self.Vt = np.linalg.svd(X)
-        
+        # Calculate the singular value decomposition of X matrix and save arrays U, S, and Vt
+        U, S, Vt = np.linalg.svd(X)
+
         # Keep only the specified number of components
         if self.n_components is not None:
-            self.U = self.U[:, :self.n_components]
-            self.S = self.S[:self.n_components]
-            self.Vt = self.Vt[:self.n_components, :]
+            U = U[:, :self.n_components]
+            S = S[:self.n_components]
+            Vt = Vt[:self.n_components, :]
 
+        self.U, self.S, self.Vt = U, S, Vt
 
         return self.U, self.S, self.Vt
-        
-    # transform() method to transform X original data using Vt components
+
     def transform(self, X):
         """
         Transform X original data using Vt components.
@@ -59,22 +56,14 @@ class SVD:
         --------
         X_transformed : array, shape (n_samples, n_components) -> Transformed data.
         """
-        if n_components is None:
-            n_components = self.n_components
+        if self.n_components is None:
+            self.n_components = self.S.shape[0]
 
-        return np.dot(X, self.Vt.T)     # where is S used? is missing the @ np.diag(S)
+        # Scale the transformed data using the singular values
+        X_transformed = np.dot(X, self.Vt[:self.n_components].T) @ np.diag(self.S)
 
-    # inverse_transform() in case we need to revert the transformation
-    def inverse_transform(self, X_transformed):
-        """
-        Revert the transformation of X_transformed.
+        return X_transformed
 
-        Parameters:
-        -----------
-        X_transformed : array-like, shape (n_samples, n_components) -> Transformed data.
-
-        Returns:
-        --------
-        X : array-like, shape (n_samples, n_features) -> Original data.
-        """
-        return np.dot(X_transformed, self.U.T)
+    def fit_transform(self, X):
+        self.fit(X)
+        return self.transform(X)

@@ -1,10 +1,9 @@
 import numpy as np
-from scipy.linalg import svd
 
 np.random.seed(1000)
 
 # Define PCA class
-class PCA:
+class PCA():
    
     def __init__(self, n_components = None):
         """Principal Component Analysis (PCA) implementation using NumPy from scratch.
@@ -25,7 +24,8 @@ class PCA:
 
     # fit() method
     def fit(self, X):
-        """Fit the PCA model to the data. Calculate the eigenvectors from covariance matrix
+        """
+        Fit the PCA model to the data. Calculate the eigenvectors from covariance matrix
 
         Parameters:
         -----------
@@ -53,16 +53,7 @@ class PCA:
 
     # transform() method
     def transform(self, X):
-        """Apply dimensionality reduction to X to new data according to the calulated eigenvectors.
-
-        Parameters:
-        -----------
-        X : array-like, shape (n_samples, n_features) -> Data to be transformed.
-
-        Returns:
-        --------
-        X_transformed : array-like, shape (n_samples, n_components) -> Transformed data.
-        """
+       
         X = X.copy()
         return np.dot(X, self.components_.T)
 

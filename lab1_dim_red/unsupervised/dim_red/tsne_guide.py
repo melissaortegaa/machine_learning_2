@@ -16,7 +16,7 @@ https://lvdmaaten.github.io/tsne/code/tsne_python.zip
 """
 
 
-class TSNE(BaseEstimator):
+class TSNE():
     y_required = False
 
     def __init__(self, n_components=2, perplexity=30.0, max_iter=200, learning_rate=500):

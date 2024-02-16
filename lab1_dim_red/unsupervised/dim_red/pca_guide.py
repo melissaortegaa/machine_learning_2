@@ -4,12 +4,12 @@ import logging
 import numpy as np
 from scipy.linalg import svd
 
-from mla.base import BaseEstimator
+# from mla.base import BaseEstimator
 
 np.random.seed(1000)
 
 
-class PCA(BaseEstimator):
+class PCA():
     y_required = False
 
     def __init__(self, n_components, solver="svd"):
