@@ -1,10 +1,9 @@
 # coding:utf-8
 import logging
-
 import numpy as np
 
-from mla.base import BaseEstimator
-from mla.metrics.distance import l2_distance
+# from mla.base import BaseEstimator
+# from mla.metrics.distance import l2_distance
 
 np.random.seed(999)
 
@@ -31,6 +30,7 @@ class TSNE():
         self.max_iter = max_iter
         self.perplexity = perplexity
         self.n_components = n_components
+        self.n_samples = 10
         self.initial_momentum = 0.5
         self.final_momentum = 0.8
         self.min_gain = 0.01
@@ -39,7 +39,7 @@ class TSNE():
         self.perplexity_tries = 50
 
     def fit_transform(self, X, y=None):
-        self._setup_input(X, y)
+        # self._setup_input(X, y)
 
         Y = np.random.randn(self.n_samples, self.n_components)
         velocity = np.zeros_like(Y)
