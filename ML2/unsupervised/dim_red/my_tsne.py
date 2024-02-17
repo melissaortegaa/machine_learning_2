@@ -3,21 +3,21 @@ import numpy as np
 # Create t-SNE class:
 class T_SNE:
     '''
-    Implementation of t-SNE algorithm using raw numpy.
+    Implementation of t-SNE algorithm using numpy.
     '''
     def __init__(self, n_components=2, perplexity=30, learning_rate=200):
         self.n_components = n_components
         self.perplexity = perplexity
         self.learning_rate = learning_rate
 
-    # Method to compute pairwise probabilities
+    #  1. compute pairwise probabilities
     def _calculate_pairwise_probabilities(self, X, perplexity):
-        # Calculation of pairwise probabilities goes here
+        # Calculation of pairwise probabilities
         pass
 
     # Method to compute gradient
     def _compute_gradient(self, P, Y):
-        # Gradient computation goes here
+        # Gradient computation
         pass
 
     # Method to perform dimensionality reduction
@@ -42,3 +42,4 @@ class T_SNE:
     def transform(self, X):
         return self.embedding_
 
+# Blog: https://nlml.github.io/in-raw-numpy/in-raw-numpy-t-sne/
