@@ -1,5 +1,6 @@
 import numpy as np
 
+# perplexity: number of neighbors
 # Create t-SNE class:
 class T_SNE:
     '''
