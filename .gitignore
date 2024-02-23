@@ -4,3 +4,4 @@ __pycache__/
 *.docx
 *.png
 /env
+lab_clustering.ipynb
