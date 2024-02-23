@@ -14,7 +14,7 @@ To execute the "dim_red.ipynb" code, follow these steps:
 
 ## Clustering
 
-Next workshop
+clustering.ipynb contains the implementation of k-means and k-medoids using numpy. Also compares the results with others algorithms such as DBSCAN and Spectral clustering from the scikit-learn library.
 
 ## Dependencies
 The code requires the following dependencies:
