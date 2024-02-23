@@ -23,3 +23,5 @@ The code requires the following dependencies:
 * NumPy
 * Matplotlib
 * OpenCV (cv2)
+* scikit-learn-extra==0.3.0
+* imageio==2.31.6
