@@ -57,7 +57,7 @@ class KMEANS:
     def fit(self, K, X, max_iterations=500):
         """Runs the K-means algorithm and computes the final clusters"""
         centroids = self.initialize_random_centroids(K, X)
-        print(f"Initial centroids:\n {centroids}\n")
+        print(f"Initial random centroids:\n {centroids}\n")
 
         for _ in range(max_iterations):
             clusters = self._create_clusters(centroids, K, X)
@@ -75,7 +75,7 @@ class KMEANS:
     
     # Implementing transform method
     def predict(self, X):
-        """Predicts the closest cluster for each data point in X"""
+        """Predicts the closest cluster for new data points in X"""
         if self.centroids is None:
             raise RuntimeError("Fit the model first before making predictions")
         
